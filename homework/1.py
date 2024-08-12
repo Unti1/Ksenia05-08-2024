@@ -32,4 +32,3 @@ print(My_string[0])
 print(My_string[-1])
 
 
-
