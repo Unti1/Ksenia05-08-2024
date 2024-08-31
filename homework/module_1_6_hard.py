@@ -1,5 +1,5 @@
-grades = [[5, 3, 3, 5, 4], [2, 2, 2, 3], [4, 5, 5, 2], [4, 4, 3], [5, 5, 5, 4, 5]]
-students = {'Johnny', 'Bilbo', 'Steve', 'Khendrik', 'Aaron'}
+grades = [[5, 3, 3, 5, 4], [2, 2, 2, 3], [4, 5, 5, 2], [4, 4, 3], [5, 5, 5, 4, 5], [5,4,3]]
+students = {'Johnny', 'Bilbo', 'Steve', 'Khendrik', 'Aaron','Nikita'}
 
 spisok = {} 
 
@@ -33,7 +33,7 @@ f = grades.pop(0)
 f1 = sum(f)
 f2 = len(f)
 f3 = (f1/f2)
-print(f3)
+print(f3, type(f3))
 
 student1 = list(students)
 
@@ -46,7 +46,9 @@ dd1 = student1.pop()
 ff1 = student1.pop()
 
 x = [[aa1,a3],[bb1,b3], [cc1,c3], [dd1,d3],[ff1,f3]]
+print(x,type(x))
 itog = dict(x)
+print(itog,type(itog))
 dd = dict(sorted(itog.items()))
 print(F'Ответ задачи: {dd}')
 
