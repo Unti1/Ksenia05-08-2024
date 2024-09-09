@@ -15,3 +15,4 @@ x = [[aa1,a3],[bb1,b3], [cc1,c3], [dd1,d3],[ff1,f3]]
 itog = dict(x)
 dd = dict(sorted(itog.items()))
 print(F'Ответ задачи: {dd}')
+
