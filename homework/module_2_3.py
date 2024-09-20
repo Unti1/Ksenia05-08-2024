@@ -9,7 +9,21 @@
 my_list = [42, 69, 322, 13, 0, 99, -5, 9, 8, 7, -6, 5]  # исходный список
 ind = 0
 
-while ind < len(my_list) and my_list[ind] >= 0:
-    if my_list[ind] != 0:
-        print(my_list[ind])
+# while ind < len(my_list) and my_list[ind] >= 0:
+#     if my_list[ind] != 0:
+#         print(my_list[ind])
+#     ind += 1
+
+
+ind = 0
+while True:
+    if ind > len(my_list):
+        break
+    if my_list[ind] < 0:
+        break
+    if my_list[ind] == 0:
+        ind += 1
+        continue
+    print(my_list[ind])
     ind += 1
+
