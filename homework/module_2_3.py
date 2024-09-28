@@ -66,10 +66,8 @@ while x <16:
 
 x = "Код"
 i = 0
-x = list(x)
 while i < len(x):
-    x = str(x)
-    print(x.upper())
+    print(x[i].upper())
     i +=1
 
 '''Напишите программу, которая выводит все кратные 3 числа от 1 до 30 с помощью `while`.'''
@@ -87,10 +85,9 @@ x1 = []
 i = 0
 
 while i < len(x):
-    x[i] += 5
-    x1.append(x)  # не понимаю 
-    print(x1)
+    x1.append( x[i]+5 )  #  
     i+=1
+print(f'{x1=}')
 
 '''Напишите программу, которая выводит все числа от 1 до 50, делящиеся на 5, с помощью цикла `while`.'''    
 
@@ -105,14 +102,12 @@ while x <51:
 x = "Hello, World!"
 i = 0
 c = 0
-print(x)
-glas = set("aeiou")
-print(glas)
-while i < 13:
-    if x in glas:    # не сделала
-        c +=3 
+glas = "aeiou"
+while i < len(x):
+    if x[i].lower() in glas:
+        c += 1 
     i +=1  
-    print(c)
+print(f'{c=}')
 
 
 '''Выведите таблицу умножения на 7 (от 1 до 10) с помощью цикла `while`.'''
@@ -146,14 +141,11 @@ while x <31:
 stroka = "Алан, давай поиграем"
 count= 0
 i = 0
-a = set("а")
-stroka = set(stroka)
-while i<len(stroka):
-    
-    if i in a:      # не поняла 
+while i < len(stroka):
+    if stroka[i].lower() == 'а':
         count +=1 
     i +=1    
-print(count)   
+print(f'{count=}')
 
 '''Задача "Нули ничто, отрицание недопустимо!":
 Дан список чисел [42, 69, 322, 13, 0, 99, -5, 9, 8, 7, -6, 5]
