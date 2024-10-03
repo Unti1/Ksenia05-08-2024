@@ -34,86 +34,79 @@
 
 '''Напиши функцию, которая принимает два числа и возвращает их сумму.'''
 
-def x():
-    one = int(input())
-    two = int(input())
+def sum_of_two(one, two):
     i = one + two
-    print(i)
-x()
+    return i
+
+print(f'1: {sum_of_two(2,3)}')
 
 """Напиши функцию, которая принимает строку и возвращает её длину."""
-def x():
-    one = (input())
+def get_len_str(one):
     i = len(one)
-    print(i)
+    return i
 
-x()  
+print( f'2: {get_len_str("Какая то строка")}')  
 
 '''Напиши функцию, которая принимает список чисел и возвращает максимальное значение в списке.'''
 
-def x():
-    a,b=map(int,input().split())
-    i = max(a,b)
-    print(i)
-x()    
+def max_of_lst(lst, *args):
+    print(args)
+    return max(lst) 
+
+print('3:',max_of_lst( [1,2,3,4,5,6,7] ) )
 
 """Напиши функцию, которая принимает строку и возвращает её в верхнем регистре."""
-def x():
-    one = (input())
+def up(one):
     i = one.upper()
-    print(i)
+    return i
 
-x()
+print('4:', up('нижний'))
 
 '''Напиши функцию, которая принимает кортеж и возвращает список с теми же элементами.'''
+def to_list(tup):
+    return list(tup)
+print('5:',to_list((44,55,66)))
 
-n = []
-lst = []
-def x():
-    lst = input('add numbers: ').split()
-    for i in lst:
-      n.append(i)
-    print(n)  
-    
-x()
 '''Напиши функцию, которая принимает кортеж и возвращает список с теми же элементами.'''
+def to_list(k):
+    return(list(k))
 
-def x(k):
-    print(list(k))
+print('6:', to_list((44,55,66)) ) 
 
-x((44,55,66)) 
+'''Напиши функцию с опциональным аргументом, которая возвращает удвоенное значение переданного числа, 
+если аргумент не передан — умножает на 3. НЕ СОВСЕМ ПОНЯЛА'''
 
-'''Напиши функцию с опциональным аргументом, которая возвращает удвоенное значение переданного числа, если аргумент не передан — умножает на 3. НЕ СОВСЕМ ПОНЯЛА'''
-
-def x(k=3):
-    if k ==3:
-        print( k*3)
+def func(x = 0):
+    if x:
+        return(x*2)
     else:
-        print(k*2)    
+        return(x*3)    
 
-x(7)
+print('7:', func(7))
+print('7:', func())
 
 '''Напиши функцию, которая принимает строку и символ, и возвращает количество вхождений этого символа в строку.'''
-def x():
-    one = input()
-    two = input()
-    count = 0
-    for i in one:
-        if i in two:
-            count +=1
-    print(count)       
-x() 
+def count_of_sym(string: str, sym: str):
+    string = string.lower()
+    count = string.count(sym)
+    return count
+
+print('8:', count_of_sym('Какая то строка', 'к'))
+
 '''Напиши функцию, которая принимает список строк и возвращает количество строк длиной больше 5 символов. '''
-
-def x(k):
+def more_then_5_len(k):
     count = 0
+    lst = []
     for i in k:
-        if len(i)>5:
+        if len(i) > 5:
             count += 1
-            print(i,count)
+            lst.append(i)
+    return lst, count
 
-x(['eeee','eeeeee','fhfhfhfhfh'])            
+print('9:',more_then_5_len(['eeee','eeeeee','fhfhfhfhfh']))
 
+
+#TODO: Остальное переделать в том же духе
 
 '''Напиши функцию, которая принимает два словаря и возвращает их объединение.'''
 def x():
