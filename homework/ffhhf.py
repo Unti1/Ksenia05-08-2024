@@ -1,7 +1,12 @@
-'''Напиши функцию, которая принимает кортеж и возвращает список с теми же элементами.'''
+def func12(k:list):
+    d = []
+    l = []
 
-def x(k):
-    print(list(k))
-
-x((44,55,66))
-
+    for i in k:
+        d = len(i)
+        l.append(d)
+        j = dict(zip(k, l))
+        
+    return j    
+        
+print('26:',func12(['ssss','ddd','dddd']))   

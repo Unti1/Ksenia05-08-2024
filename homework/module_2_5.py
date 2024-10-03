@@ -109,150 +109,141 @@ print('9:',more_then_5_len(['eeee','eeeeee','fhfhfhfhfh']))
 #TODO: Остальное переделать в том же духе
 
 '''Напиши функцию, которая принимает два словаря и возвращает их объединение.'''
-def x():
-    lst = (input('add numbers: ').split())
-    n = (input('add numbers: ').split())
-    lst.extend(n)
-    print(lst)
-x()
+def list1(k:list,d:list):
+    k.extend(d)
+    return k 
+print('10:',list1([1,2,3],[2,3,4,5]))
 
 '''Напиши функцию, которая принимает строку и возвращает её перевёрнутой (используя срезы).'''
-def x():
-    one = input()
-    i = one[::-1]
-    print(i)
-
-x()
+def str1(k:str):
+   return k[::-1]
+print('11:',str1('hi'))
 
 '''Напиши функцию, которая принимает строку и возвращает True, если строка является палиндромом, иначе False.'''
-def x():
-    b = input()
-    if b == b[::-1]:
-        print('true')
+def str2(k:str):
+    if k == k[::-1]:
+        return True
     else:
-        print('false')   
-x()
+        return False
+print('12:',str2('non'))      
 
 '''Напиши функцию с неограниченным количеством аргументов (*args), которая возвращает их произведение.'''
-def x(*args):
-    i = sum(args)
-    print(i)
+def chtoto(*args: int):
+    return sum(args)
 
+print('13:',chtoto(12,12))
 
-x(6,99)
-'''13. Напиши функцию, которая принимает список чисел и возвращает новый список, содержащий только чётные числа. NO '''
-def x(k=[]):
+''' Напиши функцию, которая принимает список чисел и возвращает новый список, содержащий только чётные числа. NO '''
+def list2(k: list):
     d =[]
     for i in k:
         if i % 2 ==0:
             d.append(i)
-            print(d)
+    return d
 
-x([55,22,77,10])
-
-x()      
+print('14:',list2([55,22,77,10]))
+     
 '''14.Напиши функцию с опциональным аргументом, которая возвращает сумму списка, если аргумент не передан — возвращает длину списка.'''
-k = [2,3,4,5,]
-def x(i=len(k)):
-    print(i)
-
-x(i=sum(k))
+def sum_list3(k=[12,33,44,77]):
+    if k==[12,33,44,77]:
+        return sum(k)
+    else:
+        return len(k)
+print('15:',sum_list3([12,33])) 
 
 '''Напиши функцию, которая принимает строку и заменяет все пробелы на дефисы.'''
 
-def x():
-    i = input()
-    i = i.replace(' ','-')
-    print(i)
+def str4(k:str):
+    return k.replace(' ','-')
 
-x()  
+print('16:',str4('dhd dhdh'))   
 
 '''Напиши функцию, которая принимает словарь и возвращает список всех его ключей.'''
 
-def x(**kwargs):
-    print(kwargs.keys())
+def dict1(**kwargs):
+    return kwargs.keys()
 
-x(n=50, my_arg=[1,2,3])    
+print('17:',dict1(n=50, my_arg=[1,2,3])) 
 
 '''Напиши функцию, которая принимает два множества и возвращает их пересечение.'''
 
-def x(i,b):
-    print(i & b)
+def set1(i,b: set):
+    return i & b
 
-x({1,2,3}, {2,3,4})   
+print('18:',set1({1,2,3}, {2,3,4}))  
 
 '''Напиши функцию, которая принимает список чисел и возвращает True, если список отсортирован по возрастанию. NO'''
-def x(d = []):
+def list5(d: list):
     k = d.copy() # если пишем равно, то идет двойное присвоение? 
     k.sort()
-    print(k)
-    print(d)
     if d == k:
-        print('true')
+        return True
     else:
-        print("false")    
+        return False
     
-x([1,7])
+print('19:', list5([1,7]))
 '''Напиши функцию с неограниченным количеством аргументов (**kwargs), которая принимает имена и возраст людей, и возвращает имя самого молодого.'''
-def x(**kwarg):
-    print(min(kwarg.keys()))
+def chtoto2(**kwarg):
+    k = min(kwarg, key=kwarg.get)
+    return k
 
-x(Ksen=22,Anna=33,Tim=1)  
+print('20:',chtoto2(Ksen=22,Anna=33,Tim=999))
+
 '''Напиши функцию, которая принимает строку и возвращает новый список, где каждый элемент — это слово из строки.'''
-def x(i=""):
-    print(i.split())
+def str6(i:str):
+    return i.split()
 
-x('shhsshss hshshh ssh')    
+print('21:',('shhsshss hshshh ssh'))  
 '''Напиши функцию, которая принимает список чисел и возвращает все возможные комбинации этих чисел.'''
-
 import itertools
  
-def x(i=[]):
+def list9(i:list):
     permutations = list(itertools.permutations(i))
     for p in permutations:
-        print(p)   
+        print(p)
+    return p     
 
-x([33,55,66])
+print('22:',list9([22,33,44,55]))
 
 '''Напиши функцию, которая принимает два списка и возвращает True, если они содержат хотя бы один общий элемент.'''
 
-def x(k=[],k1=[]):
-    k = set(k)
+def func9(k,k1: list):
+    k=set(k)
     k1=set(k1)
     if k & k1:
-        print('true')
+        return True
     else:
-        print('false')    
-x([1,2,33],[33,66,88])  
+        return False    
+print('23:',func9([1,2,33],[66,88]))
 
 '''Напиши функцию, которая принимает строку и возвращает True, если все символы в строке уникальны (используя множество).'''
 
-def x(l =''):
+def func10(l:str):
     k = set(l)
     for i in k:
         count = l.count(i)
-        if count > 1:
-            print("True")  
+        if count <= 1:
+            return True 
         else:
-            print('false')       
+            return False       
 
-x('ls')            
+print('24:',func10('ls'))            
 
 '''24. Напиши функцию, которая принимает список кортежей, каждый кортеж содержит имя и возраст, функция возвращает отсортированный список по возрасту.'''
 
 
-def x(k =[]):
-    print(sorted(k, key=lambda student: student[1])) 
+def func11(k:tuple):
+    k = sorted(k, key=lambda student: student[1])
+    return k
 
-
-x([
+print('25:',func11([
     ('Anna',44),
     ('Ksen',33),
     ('sjsjs',15)
-])
+]))
 '''Напиши функцию, которая принимает список слов и возвращает словарь, где ключ — это слово, а значение — это длина слова.'''
 
-def x(k =[]):
+def func12(k:list):
     d = []
     l = []
 
@@ -263,7 +254,6 @@ def x(k =[]):
         print(l)
         j = dict(zip(k, l))
         print(j)
+    return j    
         
-        
-
-x(['ssss','ddd','dddd'])          
+print('26:',func12(['ssss','ddd','dddd']))          
