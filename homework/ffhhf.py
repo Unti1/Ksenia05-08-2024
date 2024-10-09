@@ -36,8 +36,9 @@ False
 Файл module_3_1.py и загрузите его на ваш GitHub репозиторий. В решении пришлите ссылку на него.'''
 
 calls = 0
-global calls
 def string_info(string:str):
+    global calls
+    calls +=1 
     x = []
     x1 = string.upper()
     x2 = string.lower()
@@ -47,10 +48,23 @@ def string_info(string:str):
     x.append(x2)
     x.append(x3)
     x = tuple(x)
+    return(x)
     
-    def s_contains(string:str,list_to_search:list):
+def is_contains(string:str,list_to_search:list):
+        global calls
+        calls +=1 
         if string in list_to_search:
-            print(True)
+            return(True)
         else:
-            print(False)
-       
+            return(False)
+            
+def count_calls():
+    print(calls)
+
+print(string_info('Capybara'))
+print(string_info('Armageddon'))
+print(string_info('Armageddon'))
+print(is_contains('Urban', ['ban', 'BaNaN', 'urBAN'])) # Urban ~ urBAN
+print(is_contains('cycle', ['recycling', 'cyclic'])) # No matches
+print(calls)
+
