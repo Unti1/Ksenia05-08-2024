@@ -1,15 +1,10 @@
 calls = 0
-def count_calls():
-         global calls
-         calls +=1
-         return(calls)
-    
 def string_info(string:str):
     count_calls()
     x = []
     x1 = string.upper()
     x2 = string.lower()
-    x3 = (len(string))
+    x3 = len(string)
     x3 = str(x3)
     x.append(x1)
     x.append(x2)
