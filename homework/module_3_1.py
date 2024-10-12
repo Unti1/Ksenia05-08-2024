@@ -1,11 +1,12 @@
 calls = 0
+
 def string_info(string:str):
     global calls
     calls +=1 
     x = []
     x1 = string.upper()
     x2 = string.lower()
-    x3 = (len(string))
+    x3 = len(string)
     x3 = str(x3)
     x.append(x1)
     x.append(x2)
