@@ -181,7 +181,8 @@ def list5(d: list):
     else:
         return False
     
-print('19:', list5([1,7]))
+print('19:', list5([7,2,3]))
+print('19:', list5([2,3,4]))
 '''Напиши функцию с неограниченным количеством аргументов (**kwargs), которая принимает имена и возраст людей, и возвращает имя самого молодого.'''
 def chtoto2(**kwarg):
     k = min(kwarg, key=kwarg.get)
@@ -193,12 +194,13 @@ print('20:',chtoto2(Ksen=22,Anna=33,Tim=999))
 def str6(i:str):
     return i.split()
 
-print('21:',('shhsshss hshshh ssh'))  
+print('21:',str6('shhsshss hshshh ssh'))  
 '''Напиши функцию, которая принимает список чисел и возвращает все возможные комбинации этих чисел.'''
 import itertools
  
 def list9(i:list):
     permutations = list(itertools.permutations(i))
+
     for p in permutations:
         print(p)
     return p     
@@ -246,14 +248,14 @@ print('25:',func11([
 def func12(k:list):
     d = []
     l = []
-
+    # dct = {}
     for i in k:
         d = len(i)
-        print(d,type(d))
         l.append(d)
-        print(l)
         j = dict(zip(k, l))
-        print(j)
-    return j    
+
+    # for key in k:
+    #     dct[key] = len(key)
+    return j #, dct
         
 print('26:',func12(['ssss','ddd','dddd']))          
