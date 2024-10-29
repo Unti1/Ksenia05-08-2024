@@ -19,8 +19,11 @@
 # print(globals())
 
 ####################################
-from test_module import *
-print(globals())
+from mod4_programs.test_module import *
+b = 10
+from mod4_programs.byte_check import some_func
+print(some_func)
+# print(globals())
 # print(addition(2,7))
 # print(multiply(2,7))
 # print(globals())
