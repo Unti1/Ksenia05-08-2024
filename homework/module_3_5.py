@@ -6,4 +6,7 @@ def get_multiplied_digits(numbers:int):
     else:
         return first
 
-print(get_multiplied_digits(219))
+
+
+if __name__ == '__main__':
+    print(get_multiplied_digits(219))
