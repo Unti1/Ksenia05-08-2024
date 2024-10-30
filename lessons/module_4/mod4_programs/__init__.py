@@ -1,0 +1,1 @@
+print("Я в ините в пакете mod4_programs")
