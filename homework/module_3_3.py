@@ -1,3 +1,4 @@
+from module_3_5 import get_multiplied_digits as GG
 def print_params(a = 1, b = 'строка', c = True):
     return a,b,c
 print(print_params())
@@ -19,3 +20,5 @@ values_list_2 = [11,'hi']
 
 print(print_params(values_list_2, 42))
 print(print_params(*values_list_2, 42))
+
+print(GG(11))

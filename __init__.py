@@ -1,0 +1,1 @@
+from homework.module_3_5 import get_multiplied_digits
