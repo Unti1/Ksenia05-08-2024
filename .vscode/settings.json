@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./lessons/module_4/mod4_programs"
+    ]
+}
