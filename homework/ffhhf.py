@@ -195,4 +195,17 @@ def fibonacci(n):
 
 # Пример вызова
 print(fibonacci(10))
+inv = {}
+def add_item(item: str, quantity: int):
+    if item in inv:
+        inv[item] += quantity
+        print(inv)
+    else:
+        inv[item] = quantity
+        print(inv)
 
+add_item("Яблоки",50)
+add_item("Яблоки",50)
+add_item("Яблоки",50)
+add_item("Я",50)
+add_item("Я",50)
