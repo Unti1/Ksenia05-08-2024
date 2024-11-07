@@ -109,7 +109,7 @@ class House:
     
     def __ne__(self,other):
         if isinstance(other, House):
-            return other.number_of_floors != other.number_of_floors
+            return other.number_of_floors != self.number_of_floors
         return NotImplemented
     
     def __add__(self, value):
