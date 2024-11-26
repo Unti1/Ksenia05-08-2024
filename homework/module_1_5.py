@@ -70,3 +70,16 @@ kniga = {
     "Год издания":[1943]
 }
 print(f"Автор книги - {kniga.get("Автор")}")
+
+class Wallet:
+    def __init__(self,balance):
+        self.balance = balance
+
+    def __add__(self,other):
+        return Wallet(self.balance +other.balance)
+    
+
+a1= Wallet(10)
+a2 = Wallet(200)
+b = a1 +a2
+print(b)
