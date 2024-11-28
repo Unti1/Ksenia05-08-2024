@@ -287,7 +287,7 @@ print(s.add(20))
 print(s.add(20))
 print(s.add(20))
 
-'''**Класс для расчёта среднего арифметического**  
+'''**1 Класс для расчёта среднего арифметического**  
    Напиши класс `AverageCalculator` с методом `add_number(number)` для добавления числа и методом `get_average()`, который возвращает среднее значение добавленных чисел.
 '''
 class AverageCalculator:
@@ -304,7 +304,7 @@ x1.add_number(1)
 x1.add_number(2)
 print(x1.get_average()) 
 
-'''**Класс для работы с датами**  
+'''**2 Класс для работы с датами**  
    Создай класс `DateHandler` с атрибутом `date` (строка в формате "ДД-ММ-ГГГГ"). Реализуй метод `get_year()`, возвращающий год из строки.
 '''
 class DateHandler:
@@ -319,17 +319,212 @@ a = DateHandler("11-04-1999")
 print(a.get_year())
 
 
-'''**Создание объекта на основе данных**  
+'''**3 Создание объекта на основе данных**  
    Напиши класс `Book`, который создаёт объект на основе словаря с ключами `"title"` и `"author"`. Добавь метод `from_dict(data)` для инициализации объекта из словаря.
 
 '''
-'''class Book:
-    def __init__(self,obj:tuple):
-        self.obj = obj'''
 
-'''*Проверка уникальности данных**  
+
+'''*4 Проверка уникальности данных**  
    Создай класс `UniqueList` с атрибутом `items` (список). Добавь метод `add(item)`, который добавляет элемент в список, если его там ещё нет.
 '''        
+
+class UniqueList:
+    def __init__(self,items=[]):
+        self.items = items
+        
+    def add(self,item):
+        if item not in self.items:
+                self.items.append(item)
+                return self.items
+        return "Уже есть"   
+
+a = UniqueList()
+print(a.add(10))
+print(a.add(20))
+print(a.add(10))
+
+''' **5 Работа с координатами точки**  
+   Напиши класс `Point` с атрибутами `x` и `y`. Добавь метод `distance_to(other_point)`, который вычисляет расстояние между текущей точкой и другой.
+'''
+import math
+class Point:
+    def __init__(self,x,y):
+        self.x = x
+        self.y = y
+    def distance_to(self,other_point):
+        if isinstance(other_point,Point):
+            x1 = self.x - other_point.x
+            x2 = self.y - other_point.y
+            return math.sqrt(x1**2+x2**2)
+        
+a = Point(1,2)
+a1 = Point(3,4)
+print(a.distance_to(a1))   
+
+'''**6 Создание класса для подсчёта символов**  
+   Напиши класс `CharCounter` с атрибутом `text`. Добавь метод `count(char)`, который возвращает количество вхождений символа `char` в текст.
+
+'''
+
+class CharCounter:
+    def __init__(self,text):
+        self.text = text
+
+    def count(self,char):
+        return self.text.lower().count(char.lower())
+    
+a = CharCounter('Ппривет Привет')
+print(a.count('П'))    
+
+'''*7 *Генерация последовательности**  
+   Напиши класс `SequenceGenerator` с методом `generate(start, step, count)`, который возвращает список из `count` чисел, начиная с `start` и с шагом `step`.
+
+'''
+''' **8 Класс для работы с инвентарём**  
+   Создай класс `Inventory` с атрибутом `items` (словарь, где ключ — название предмета, а значение — количество). Реализуй методы `add_item(name, quantity)` и `remove_item(name, quantity)`'''
+
+class Inventory:
+    def __init__(self,items:dict):
+        self.items = items
+    def add_item(self,name, quantity):
+        self.items.setdefault(name,quantity)
+        return self.items
+    def remove_item(self,name, quantity):
+        self.items.pop(name)
+        return self.items
+    
+x = Inventory({'Chear':10,'Table':2})  
+print(x.add_item('sofa',10))
+print(x.remove_item('sofa',10))
+
+'''9 Фильтрация списка по длине строки**  
+   Напиши класс `StringFilter` с атрибутом `strings`. Реализуй метод `filter_by_length(length)`, который возвращает строки, длина которых больше заданной.
+'''
+
+class StringFilter:
+    def __init__(self,string=[]):
+        self.strings = string
+    def filter_by_length(self,length:int):
+        for string in self.strings:
+            return [string for string in self.strings if len(string) > length] 
+                
+            
+            
+        
+a = StringFilter(['Ghohh.ssssh.ss','sssss','sss'])
+print(a.filter_by_length(2))      
+
+'''  10 Создай класс `Calculator` с атрибутами `a` и `b`. Добавь метод `sum()`, который возвращает их сумму, и метод `multiply()`, который возвращает их произведение.
+'''
+
+class Calculator:
+    def __init__(self,a,b):
+        self.a = a
+        self.b = b 
+
+    def sum(self):
+        return self.a + self.b
+    def multiply(self):
+        return self.a * self.b
+a = Calculator(2,4)
+print(a.sum())    
+print(a.multiply())   
+
+'''**11 Управление сессией пользователя**  
+    Создай класс `Session`, который сохраняет имя пользователя и время создания. Добавь метод `is_active(current_time, timeout)`, который проверяет, активна ли сессия, исходя из времени и таймаута.
+'''
+
+
+
+''' **12 Класс с ограниченным диапазоном значений**  
+    Создай класс `BoundedNumber` с атрибутом `value` и методами `increase()` и `decrease()`, которые изменяют значение. Установи ограничения: значение не может быть меньше 0 или больше 100.
+
+'''
+class BoundedNumber:
+    def __init__(self,value):
+        self.value = value
+    def increase(self,x):
+        if 0 < self.value < 100:
+            x1 = self.value + x
+            return x1
+            
+    def decrease(self,y):
+        if 0 < self.value < 100:
+            y1 = self.value - y
+            return y1
+    
+            
+        
+
+x = BoundedNumber(20)
+print(x.increase(2)) 
+print(x.increase(200)) 
+print(x.decrease(3))
+
+'''**13 Работа с матрицей**  
+    Напиши класс `Matrix` с атрибутом `data` (двумерный список). Добавь метод `transpose()`, который возвращает транспонированную матрицу.
+
+'''        
+'''**14 Создание числовой статистики**  
+    Напиши класс `NumberStats` с атрибутом `numbers` (список). Реализуй методы `min()`, `max()` и `mean()`, которые возвращают минимальное, максимальное и среднее значение списка.
+'''   
+
+import statistics
+
+class NumberStats:
+    def __init__(self,numbers):
+        self.numbers = numbers
+
+    def min(self):
+        return min(self.numbers)   
+    def max(self):
+        return max(self.numbers)  
+
+    def mean(self):
+        return statistics.mean(self.numbers)  
+    
+a = NumberStats([1,2,3,4])    
+print(a.min())
+print(a.max())
+print(a.mean())
+
+'''**15 Управление задачами с дедлайном**  
+    Создай класс `Task` с атрибутами `name` и `deadline` (строка). Добавь метод `is_overdue(current_date)`, который проверяет, просрочена ли задача.'''
+
+class Task:
+    def __init__(self,name,deadline:str):
+        self.name = name
+        self.deadline= int(deadline)
+
+    def is_overdue(self,current_date):
+        if current_date < self.deadline:
+            return "No"
+        return "Просрочена"
+
+a = Task('X','10')
+print(a.is_overdue(20))
+
+'''**16 Класс для форматирования строк**  
+    Напиши класс `StringFormatter` с методом `capitalize_words(text)`, который возвращает строку, где каждое слово начинается с заглавной буквы.'''
+
+class StringFormatter:
+    def capitalize_words(self,text):
+        if text ==  text.capitalize():
+            return text
+
+a = StringFormatter()
+print(a.capitalize_words('Ghhh'))  
+
+
+ 
+
+
+
+
+
+
+
 
 
 
