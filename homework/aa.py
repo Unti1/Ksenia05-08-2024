@@ -264,6 +264,61 @@ print(s.add(20))
 print(s.add(20))
 print(s.add(20))
 
+'''**Класс для расчёта среднего арифметического**  
+   Напиши класс `AverageCalculator` с методом `add_number(number)` для добавления числа и методом `get_average()`, который возвращает среднее значение добавленных чисел.
+'''
+class AverageCalculator:
+    x = []
+    def add_number(self,number):
+        return AverageCalculator.x.append(number)
+    
+    def get_average(self):
+        a = sum(AverageCalculator.x)/len(AverageCalculator.x)
+        return a
+    
+x1 = AverageCalculator()
+x1.add_number(1)  
+x1.add_number(2)
+print(x1.get_average()) 
+
+'''**Класс для работы с датами**  
+   Создай класс `DateHandler` с атрибутом `date` (строка в формате "ДД-ММ-ГГГГ"). Реализуй метод `get_year()`, возвращающий год из строки.
+'''
+class DateHandler:
+    def __init__(self,date:str):
+        self.date = date
+
+    def get_year(self):
+        a = self.date.split('-')
+        return a[-1]  
+    
+a = DateHandler("11-04-1999") 
+print(a.get_year())
+
+
+'''**Создание объекта на основе данных**  
+   Напиши класс `Book`, который создаёт объект на основе словаря с ключами `"title"` и `"author"`. Добавь метод `from_dict(data)` для инициализации объекта из словаря.
+
+'''
+'''class Book:
+    def __init__(self,obj:tuple):
+        self.obj = obj'''
+
+'''*Проверка уникальности данных**  
+   Создай класс `UniqueList` с атрибутом `items` (список). Добавь метод `add(item)`, который добавляет элемент в список, если его там ещё нет.
+'''        
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
