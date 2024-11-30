@@ -287,13 +287,14 @@ print(s.add(20))
 print(s.add(20))
 print(s.add(20))
 
-'''**1 Класс для расчёта среднего арифметического**  
+'''+ *1 Класс для расчёта среднего арифметического**  
    Напиши класс `AverageCalculator` с методом `add_number(number)` для добавления числа и методом `get_average()`, который возвращает среднее значение добавленных чисел.
 '''
 class AverageCalculator:
     x = []
     def add_number(self,number):
         return AverageCalculator.x.append(number)
+        # return self.__class__.x.append(number)
     
     def get_average(self):
         a = sum(AverageCalculator.x)/len(AverageCalculator.x)
@@ -304,7 +305,7 @@ x1.add_number(1)
 x1.add_number(2)
 print(x1.get_average()) 
 
-'''**2 Класс для работы с датами**  
+'''**2 + Класс для работы с датами**  
    Создай класс `DateHandler` с атрибутом `date` (строка в формате "ДД-ММ-ГГГГ"). Реализуй метод `get_year()`, возвращающий год из строки.
 '''
 class DateHandler:
@@ -319,13 +320,22 @@ a = DateHandler("11-04-1999")
 print(a.get_year())
 
 
-'''**3 Создание объекта на основе данных**  
+''' * 3 Создание объекта на основе данных  
    Напиши класс `Book`, который создаёт объект на основе словаря с ключами `"title"` и `"author"`. Добавь метод `from_dict(data)` для инициализации объекта из словаря.
 
 '''
 
+class Book:
+    def __init__(self, title, author, **kwargs):
+        title = title
+        author = author
 
-'''*4 Проверка уникальности данных**  
+    @classmethod
+    def from_dict(cls, data):
+        return cls(**data)
+
+
+'''+ *4 Проверка уникальности данных**  
    Создай класс `UniqueList` с атрибутом `items` (список). Добавь метод `add(item)`, который добавляет элемент в список, если его там ещё нет.
 '''        
 
@@ -335,8 +345,8 @@ class UniqueList:
         
     def add(self,item):
         if item not in self.items:
-                self.items.append(item)
-                return self.items
+            self.items.append(item)
+            return self.items
         return "Уже есть"   
 
 a = UniqueList()
@@ -344,7 +354,7 @@ print(a.add(10))
 print(a.add(20))
 print(a.add(10))
 
-''' **5 Работа с координатами точки**  
+'''+ **5 Работа с координатами точки**  
    Напиши класс `Point` с атрибутами `x` и `y`. Добавь метод `distance_to(other_point)`, который вычисляет расстояние между текущей точкой и другой.
 '''
 import math
@@ -354,15 +364,15 @@ class Point:
         self.y = y
     def distance_to(self,other_point):
         if isinstance(other_point,Point):
-            x1 = self.x - other_point.x
-            x2 = self.y - other_point.y
-            return math.sqrt(x1**2+x2**2)
+            x = self.x - other_point.x
+            y = self.y - other_point.y
+            return math.sqrt(x**2+y**2)
         
 a = Point(1,2)
 a1 = Point(3,4)
 print(a.distance_to(a1))   
 
-'''**6 Создание класса для подсчёта символов**  
+'''+ **6 Создание класса для подсчёта символов**  
    Напиши класс `CharCounter` с атрибутом `text`. Добавь метод `count(char)`, который возвращает количество вхождений символа `char` в текст.
 
 '''
@@ -381,30 +391,57 @@ print(a.count('П'))
    Напиши класс `SequenceGenerator` с методом `generate(start, step, count)`, который возвращает список из `count` чисел, начиная с `start` и с шагом `step`.
 
 '''
-''' **8 Класс для работы с инвентарём**  
+class SequenceGenerator:
+    def generate(self, start, step, count):
+        result = []
+        c = 0
+        result.append(start) 
+        while c < count:
+            c += 1
+            start += step
+            result.append(start)
+        return result
+    
+s = SequenceGenerator()
+print(s.generate(1,2,5))
+
+'''- **8 Класс для работы с инвентарём**  
    Создай класс `Inventory` с атрибутом `items` (словарь, где ключ — название предмета, а значение — количество). Реализуй методы `add_item(name, quantity)` и `remove_item(name, quantity)`'''
 
 class Inventory:
     def __init__(self,items:dict):
         self.items = items
+
     def add_item(self,name, quantity):
-        self.items.setdefault(name,quantity)
+        # self.items.setdefault(name,quantity) # Добавляет но только единажды когда объекта в словаре нет
+        if name in self.items:
+            self.items[name] += quantity
+        else:
+            self.items[name] = quantity
         return self.items
+    
     def remove_item(self,name, quantity):
-        self.items.pop(name)
+        if name in self.items and quantity < self.items[name]:
+            self.items[name] -= quantity
+        elif name in self.items and quantity == self.items[name]:
+            self.items.pop(name)
+        else:
+            print('Нет столько заданного предмета в инвентаре')
         return self.items
     
 x = Inventory({'Chear':10,'Table':2})  
 print(x.add_item('sofa',10))
 print(x.remove_item('sofa',10))
 
-'''9 Фильтрация списка по длине строки**  
+'''9 + Фильтрация списка по длине строки**  
    Напиши класс `StringFilter` с атрибутом `strings`. Реализуй метод `filter_by_length(length)`, который возвращает строки, длина которых больше заданной.
 '''
 
 class StringFilter:
+
     def __init__(self,string=[]):
         self.strings = string
+        
     def filter_by_length(self,length:int):
         for string in self.strings:
             return [string for string in self.strings if len(string) > length] 
@@ -415,7 +452,7 @@ class StringFilter:
 a = StringFilter(['Ghohh.ssssh.ss','sssss','sss'])
 print(a.filter_by_length(2))      
 
-'''  10 Создай класс `Calculator` с атрибутами `a` и `b`. Добавь метод `sum()`, который возвращает их сумму, и метод `multiply()`, который возвращает их произведение.
+''' + 10 Создай класс `Calculator` с атрибутами `a` и `b`. Добавь метод `sum()`, который возвращает их сумму, и метод `multiply()`, который возвращает их произведение.
 '''
 
 class Calculator:
@@ -425,6 +462,7 @@ class Calculator:
 
     def sum(self):
         return self.a + self.b
+    
     def multiply(self):
         return self.a * self.b
 a = Calculator(2,4)
@@ -437,7 +475,7 @@ print(a.multiply())
 
 
 
-''' **12 Класс с ограниченным диапазоном значений**  
+'''+ **12 Класс с ограниченным диапазоном значений**  
     Создай класс `BoundedNumber` с атрибутом `value` и методами `increase()` и `decrease()`, которые изменяют значение. Установи ограничения: значение не может быть меньше 0 или больше 100.
 
 '''
