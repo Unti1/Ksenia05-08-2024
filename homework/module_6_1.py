@@ -71,7 +71,8 @@ class Animal:
     def __init__(self,name):
         self.alive = True
         self.fed = False 
-        self.name =name 
+        self.name = name
+
     def eat(self,food):
         if isinstance(food,Plant):
             if food.edible == False:
