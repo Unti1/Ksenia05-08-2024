@@ -52,120 +52,88 @@ ur.watch_video('Для чего девушкам парень программи
 ur.register('urban_pythonist', 'iScX4vIJClb9YQavjAgF', 25)
 ur.watch_video('Для чего девушкам парень программист?')'''
 import hashlib
-import time
 class User:
     def __init__(self,nickname,password,age):
         self.nickname = nickname
-        self.password = int(hashlib.sha256(password.encode()).hexdigest(), 16)
-        self.age = age
- 
+        self.password = password
+        self.age = int(hashlib.sha256(password.encode()).hexdigest(), 16)
 
 class Video:
-    def __init__(self,title,duration,time_now = 0,adult_mode = False):
+    def __init__(self,title,duration=0,adult_mode=False):
         self.title = title
         self.duration = duration
-        self.time_now = time_now
         self.adult_mode = adult_mode
 
 class UrTube:
-    def __init__(self):
-        self.users:list[User] = []
+    def __init__(self,users=[],videos=[],current_user=None):
+        self.users = []
         self.videos = []
         self.current_user = None
-    
 
-
-    def login(self,nickname, password):
-        for user in self.users:
-            if nickname == user.nickname:
-                if int(hashlib.sha256(password.encode()).hexdigest(), 16) == user.password: 
-                    self.current_user = user 
-                    print(f'{user} создан!')
+    def log_in(self,nickname, password):
+        for x in self.users:
+            if x.nickname == nickname:
+                if int(hashlib.sha256(password.encode()).hexdigest(), 16) == x.password:
+                    self.current_user = x
+                    print(f'{x} ввошел в систему')
+            print('пройдите регистрацию')        
+    def register(self,nickname, password, age):
+        for x in self.users:
+            if x.nickname == nickname:
+                print(f'Пользователь {nickname} уже существует". После регистрации, вход выполняется автоматически.')
+            new_us = User(nickname,password,age)
+            self.users.append(new_us)
+            self.current_user = new_us
+            print(f'{new_us} успешно зареган') 
 
     def log_out(self):
-        self.current_user = None
+        self.current_user = None        
+        print(f'{self.current_user} вышел из системы')
+    def add(self,*videos:Video):
+        for video in videos:
+            if not any(existing_video.title == video.title and existing_video.duration == video.duration for existing_video in self.videos):
+                self.videos.append(video)
+                print(f"Видео '{video.title}' добавлено.")
+            else:
+                print(f"Видео '{video.title}' уже существует и не будет добавлено.")
 
-    def register(self,nickname, password, age):
-        for user in self.users:
-            if nickname == user.nickname:
-                print(f'Пользователь {nickname} уже существует". После регистрации, вход выполняется автоматически.')
-        new_user = User(nickname, password, age)
-        self.users.append(new_user)
-        self.current_user = new_user
-        return f"Пользователь {nickname} успешно зарегистрирован и вошёл в систему"
-                
-    def add(self,other:Video):
+    def get_videos(self,title):
+        all = []
         for x in self.videos:
-            if other.title == x.title: # показать по строкам как работает 
-                print('No')
-        self.videos.append(other)
-        return "Готово"
+            if title.lower() in x.title.lower():
+                all.append(x.title)
+        return all  
     
-    def get_videos(self,name):
-        result =[]
-        for x in self.videos:
-            if name.lower() in x.title.lower():
-                result.append(x.title) 
-        return result
+        
     
-    def watch_video(self,name):
-        if not self.current_user:
-            return "Войдите в аккаунт, чтобы смотреть видео."
-            
-
-        for x in self.videos:
-            if name.lower() == x.title.lower():
-            # Проверяем ограничение 18+
-                if x.adult_mode and self.current_user.age < 18:
-                    return "Вам нет 18 лет, пожалуйста покиньте страницу."
-                    
-                print(f"Начинаем просмотр видео '{x.title}'.")
-                for second in range(x.time_now, x.duration):
-                    print(f"Секунда {second + 1}")
-                    time.sleep(1)  # Пауза между выводами
-                x.time_now = 0
-                return "Конец видео."
-        return "Видео не найдено."
-                
-            
-    
-                    
-                
-
-            
-
-
-                
         
+     
         
-        
+
 
 ur = UrTube()
 v1 = Video('Лучший язык программирования 2024 года', 200)
 v2 = Video('Для чего девушкам парень программист?', 10, adult_mode=True)
 v3 = Video('Лучший язык программирования 20243 года', 200)
+v4 = Video('Лучший язык программирования 20243 года', 600)
 
 # Добавление видео
-print(ur.add(v1))
-print(ur.add(v2))
-print(ur.add(v2))
-print(ur.add(v3))
+ur.add(v1)
+ur.add(v2)
+ur.add(v2,v3)
+ur.add(v3)
+ur.add(v3)
+ur.add(v4)
 print(ur.get_videos('лучший'))
 print(ur.get_videos('ПРОГ'))
-print(ur.watch_video('Для чего девушкам парень программист?'))
-print(ur.register('vasya_pupkin', 'lolkekcheburek', 13))
-print(ur.register('vasya_pupkin', 'lolkekcheburek', 13))
-print(ur.watch_video('Для чего девушкам парень программист?'))
-print(ur.register('urban_pythonist', 'iScX4vIJClb9YQavjAgF', 25))
-print(ur.watch_video('Для чего девушкам парень программист?'))
 
 
 
 
 
 
+                    
 
 
-    
-            
-        
+
+

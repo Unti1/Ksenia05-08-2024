@@ -473,8 +473,18 @@ print(a.multiply())
     Создай класс `Session`, который сохраняет имя пользователя и время создания. Добавь метод `is_active(current_time, timeout)`, который проверяет, активна ли сессия, исходя из времени и таймаута.
 '''
 
+class Session:
+    def __init__(self,name,time):
+        self.name =name
+        self.time=time
 
+    def is_active(self,current_time, timeout):
+        all = timeout +self.time 
+        if current_time <= all:
+            return 'activ'
 
+a = Session('karl',10)
+print(a.is_active(1,1))
 '''+ **12 Класс с ограниченным диапазоном значений**  
     Создай класс `BoundedNumber` с атрибутом `value` и методами `increase()` и `decrease()`, которые изменяют значение. Установи ограничения: значение не может быть меньше 0 или больше 100.
 
@@ -557,7 +567,8 @@ print(a.capitalize_words('Ghhh'))
 
  
 
-
+class a:
+    def
 
 
 
