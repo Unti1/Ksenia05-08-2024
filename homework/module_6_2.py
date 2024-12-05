@@ -88,10 +88,10 @@ class Vehicle:
         print(f'{self.get_model()},{self.get_horsepower()},{self.get_color()},Владелец: {self.owner}')
     
     def set_color(self,new_color):
-        for x in self._Vehicle__COLOR_VARIANTS:
+        for x in self._Vehicle__COLOR_VARIANTS: 
             if x.lower() == new_color.lower():
                 self.__color = new_color
-                print('Цвет изменен')   #объяснить с ретерн и принт 
+                print('Цвет изменен')   
                 return
         print(f'Нельзя сменить цвет на {new_color}')
 

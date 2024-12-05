@@ -565,10 +565,26 @@ a = StringFormatter()
 print(a.capitalize_words('Ghhh'))  
 
 
- 
+class A:
+    def action(self):
+        
+        print("Action from A")
+        
+        
+        
 
-class a:
-    def
+class B:
+    def action(self):
+        print("Action from B")
+        
+
+class C(A, B):
+    pass
+
+c = C()
+c1=A()
+
+c.action()
 
 
 

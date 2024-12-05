@@ -104,7 +104,7 @@ class Figure:
         if len(sides) == self.sides_count:
             self.__sides = list(sides)
         else:
-            self.__sides = [sides[0]] * self.sides_count 
+            self.__sides = [1] * self.sides_count 
         
     def get_color(self):
         return self.__color  
@@ -115,7 +115,7 @@ class Figure:
             return True
             
     def set_color(self,r,g,b):
-        if self.__is_valid_color(r,g,b):
+        if self.__is_valid_color(r,g,b): # уточнить
             self.__color = [r,g,b]
             return self.__color
         else:
@@ -125,7 +125,7 @@ class Figure:
     
    
     def __is_valid_sides(self,side):
-         if len(side) == len(self.__sides) and all(isinstance(x, (int, float)) and x > 0 for x in side):
+         if len(side) == len(self.__sides) and all(isinstance(x, (int, float)) and x > 0 for x in side): # объяснить эту структуру 
             return True     
                 
     def get_sides(self):
@@ -143,8 +143,8 @@ class Figure:
 
 class Circle(Figure):
     sides_count = 1
-    def __init__(self,color,sides):
-        Figure.__init__(self,color,sides)
+    def __init__(self,color,*sides):
+        Figure.__init__(self,color,*sides)
         self.__radius = self.get_sides()[0]/ 6.28
         
 
@@ -153,16 +153,22 @@ class Circle(Figure):
         return x
 class Triangle(Figure):
     sides_count = 3
-    def et_square(self):
+    def get_square(self):
         p = sum(self.get_sides())/2
+        print(p)
         return math.sqrt(p * (p - self.get_sides()[0]) * (p - self.get_sides()[1]) * (p - self.get_sides()[-1]))
 
 class Cube(Figure):
     sides_count = 12
-    def __init__(self,color,sides):
-        Figure.__init__(self,color,sides)
-        x = [self.get_sides()[0]] *12
+    def __init__(self,color,*sides):
+        Figure.__init__(self,color)
+        
+
+        x = [sides[0]] *12
         self.__sides =x
+        
+    def get_sides(self):
+        return self.__sides   # решила добавить, так как не знаю как по другому,  
 
     def get_volume(self):
         return self.__sides[0]**3
@@ -170,6 +176,7 @@ class Cube(Figure):
 
 circle1 = Circle((200, 200, 100), 10) # (Цвет, стороны)
 cube1 = Cube((222, 35, 130), 6)
+print(cube1.get_sides())
 
 
 # Проверка на изменение цветов:
@@ -189,3 +196,10 @@ print(len(circle1))
 
 # Проверка объёма (куба):
 print(cube1.get_volume())
+
+a =Circle([1,2,3],1,6)
+print(a.get_square())
+v =Triangle([1,2,3],3,3,3)
+print(v.get_square())
+t=Triangle((200, 200, 100), 10, 6)
+print(t.get_sides())
