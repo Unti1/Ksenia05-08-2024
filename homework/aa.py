@@ -567,7 +567,7 @@ print(a.capitalize_words('Ghhh'))
 
 class A:
     def action(self):
-        
+        super().action()
         print("Action from A")
         
         

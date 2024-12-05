@@ -120,13 +120,6 @@ class PoisonousAnimal(Animal):
 
 class Duckbill(Bird, PoisonousAnimal,AquaticAnimal):
     sound = "Click-click-click"
-    
-
-    
-        
-        
-        
-
 
 db = Duckbill(10)
 

@@ -97,7 +97,7 @@ import math
 
 class Figure:
     sides_count = 0
-    def __init__(self,color=(0,0,0),*sides):
+    def __init__(self, color=(0,0,0), *sides):
         self.__sides = sides
         self.__color = color
         self.filled = False
@@ -120,16 +120,14 @@ class Figure:
             return self.__color
         else:
             return 'no'
-
-        
-    
    
-    def __is_valid_sides(self,side):
+    def __is_valid_sides(self, side):
          if len(side) == len(self.__sides) and all(isinstance(x, (int, float)) and x > 0 for x in side): # объяснить эту структуру 
             return True     
                 
     def get_sides(self):
         return self.__sides
+    
     def __len__(self):
         return sum(self.__sides)    
 
@@ -160,22 +158,21 @@ class Triangle(Figure):
 
 class Cube(Figure):
     sides_count = 12
-    def __init__(self,color,*sides):
-        Figure.__init__(self,color)
+    def __init__(self, color, *sides):
+        cube_side = sides[0]
+        x =  [cube_side]*self.sides_count
+        Figure.__init__(self, color, *x)
         
-
-        x = [sides[0]] *12
-        self.__sides =x
         
-    def get_sides(self):
-        return self.__sides   # решила добавить, так как не знаю как по другому,  
+    # def get_sides(self):
+    #     return self.__sides   # решила добавить, так как не знаю как по другому,  
 
     def get_volume(self):
-        return self.__sides[0]**3
-
+        return self._Figure__sides[0]**3
 
 circle1 = Circle((200, 200, 100), 10) # (Цвет, стороны)
 cube1 = Cube((222, 35, 130), 6)
+print(len(cube1))
 print(cube1.get_sides())
 
 
