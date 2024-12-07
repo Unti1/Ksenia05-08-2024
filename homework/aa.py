@@ -586,6 +586,43 @@ c1=A()
 
 c.action()
 
+class A:
+    def __init__(self):
+        self.a=[]
+    def xx(self,other):
+        x1=[]
+        for x in other.a:
+            x1.append(x)
+            print(f'+ {x}')
+        other.a=x1    
+        return other.a    
+        
+            
+
+            
+
+
+    
+
+class B(A):
+    def set(self,x):
+        self.a.append(x)
+        return self.a
+    
+    
+
+x10 = B()
+x10.set(10)
+x1 = B()
+x10.set(11)
+x2 = B()
+
+
+
+print(x1.xx(x10))
+
+
+       
 
 
 
