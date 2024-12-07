@@ -78,7 +78,7 @@ class UrTube:
     def login(self,nickname, password):
         for user in self.users:
             if nickname == user.nickname:
-                if int(hashlib.sha256(password.encode()).hexdigest(), 16) == user.password: 
+                if int(hashlib.sha256(password.encode()).hexdigest(), 16) == user.password:
                     self.current_user = user 
                     print(f'{user} создан!')
 
@@ -97,7 +97,8 @@ class UrTube:
     def add(self,other:Video):
         for x in self.videos:
             if other.title == x.title: # показать по строкам как работает 
-                print('No')
+                return 'No'
+                
         self.videos.append(other)
         return "Готово"
     
