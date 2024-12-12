@@ -1,0 +1,4 @@
+This special text for test
+Look at 
+This
+Strings
