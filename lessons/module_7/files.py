@@ -6,7 +6,10 @@ name = 'lessons/module_7/text.txt'
 # print(file.read())
 
 with open(name, 'r') as file:
-    print(f'{file.read()=}')
+    print(file.read())
+    print(file.tell())
+    file.seek(0)
+    print(f'{file.read()}')
 
 # print(file.read())
 

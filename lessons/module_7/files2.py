@@ -20,12 +20,13 @@ name = 'lessons/module_7/text3.txt'
 with open(name, 'w') as fl:
     print(fl.tell())
     # text = str(fl.write('Hello'))# Записывает нормально
-    text = str(fl.write('Привет'))# Записывает как торабарщину
+    text = fl.write('Приветт')# Записывает как торабарщину
     print(fl.tell())
-
 
 with open(name, 'wb') as fl:
     print(fl.tell())
     # text = str(fl.write('Hello'))
     text = str(fl.write('Привет'.encode()))
-    print(fl.tell())
+    print(fl.tell())    
+
+

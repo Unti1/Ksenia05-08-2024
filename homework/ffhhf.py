@@ -211,18 +211,23 @@ add_item("Я",50)
 add_item("Я",50)
 
 
+a = 'Привет!'
+a1 = a.encode('utf-8')
+print(a1)
+a3 = b'\xd0\x9f\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82!'
+print(a3)
+a4 = a1.decode()
+print(a4)
+name = 'homework/1.txt'
 
-def Nikita():
-    x1 = input('Привет, как тебя зовут?')
-    x = input(F"Привет,{x1}! Ты звонишь, чтобы опять испротить Ксюшечке настроение? Напиши:Да/Нет-").lower()
-    if x == "да":
-        print("Отказано! Пошел нах!")
-    elif x=="нет":
-        print("Хорошо, соединяем. Ожидайте!")
-    else:
-        print('Научись писать и звони заново!')
-
-Nikita()
+with open(name,'r',encoding='utf-8') as file:
+    x = file.read()
+    x = x.replace('Привет','').replace('\n',' ')
+with open(name,'w',encoding='utf-8') as file:
+    file.write(x)
 
 
+a=10
+b='an'
 
+print(f'{a:10}\n{b:03}')
