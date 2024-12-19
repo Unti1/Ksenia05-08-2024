@@ -230,4 +230,9 @@ with open(name,'w',encoding='utf-8') as file:
 a=10
 b='an'
 
-print(f'{a:10}\n{b:03}')
+print(f'{b:10s}\n{a:05}')
+a= 'homework/1.txt'
+with open(a,'r',encoding='utf-8') as file:
+    x = file.readlines()
+    print(x)
+    
