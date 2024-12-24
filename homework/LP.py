@@ -93,18 +93,106 @@ with open('random_numbers.txt','w',encoding='utf-8') as file:
 У тебя есть несколько текстовых файлов (`file1.txt`, `file2.txt`, ...). Напиши программу, которая объединяет их содержимое в один файл, 
 но с добавлением номера файла в начале каждой строки.
 '''
-with open('homework/file1.txt','r',encoding='utf-8') as file:
+'''def x(*name):
+    with open('homework/file1.txt','r',encoding='utf-8') as file:
     with open('homework/file2.txt','r',encoding='utf-8') as file1:
         x=[]
         x1=file.read().split('\n')
-        cont =0
-        for x in x1:
-            cont+=1
-            x+=cont+x
         x2=file1.read().split('\n')
-        cont1 =0
-        for x in x2:
-            cont1+=1
-            print(f'{cont1}:{x}')    
+        x.append(x1)
+        x.append(x2)
+        print(x)
+        for x1 in x:
+            for x2,x1 in enumerate(x1):
+                
+                x3=f'{x2}:{x1}'
+                print(x3,type(x3))'''
 
+''' Чтение данных в таблице CSV**
+Напиши программу, которая читает CSV-файл `employees.csv` (в нем хранятся данные о сотрудниках компании: имя, возраст, зарплата) 
+и находит самого младшего сотрудника. Выведи его имя и возраст.
+'''       
+import csv    
+with open('homework/employees.csv','r',encoding='utf-8') as file:
+    reader = csv.DictReader(file)
+    youngest_employee = None
+    for row in reader:
+                print(int(row['Возраст']))
+                if youngest_employee is None or row['Возраст'] < youngest_employee['Возраст']:
+                    youngest_employee = row
+    print(youngest_employee)                
+
+'''4. Генерация отчета по транзакциям**
+Создай программу, которая анализирует данные из файла `transactions.csv` (колонки: дата, сумма, описание) и выводит отчет:
+- Общее количество транзакций,
+- Общая сумма по всем транзакциям,
+- Сумма по положительным и отрицательным транзакциям,
+- Дата самой крупной транзакции.'''   
+
+import csv
+with open('homework/transactions.csv','r',encoding='utf-8') as file:
+    x=csv.DictReader(file)
+    x1=[]
+    x2=[]
+    x3=[]
+    x4=[]
+    for xx in x:
+        date = xx['дата']
+        x1.append(xx['дата'])
+        x2.append(int(xx['сумма']))
+        print(xx)
+        if int(xx['сумма'])>=0:
+             x3.append(int(xx['сумма']))   
+        else:
+             x4.append(int(xx['сумма'])) 
+      
+print(len(x1))
+print(sum(x2))
+'''Построение индексного файла**
+Напиши программу, которая создает индексный файл `index.txt` для файла с большим количеством строк `data.txt`. В индексном файле нужно записывать информацию о номере строки и начале каждого слова в этой строке.  
+Например, если в строке содержатся слова, индексация будет выглядеть так:  
+`1: слово1 (позиция 0), слово2 (позиция 6)`'''
+with open('homework/data.txt','r',encoding='utf-8') as file:
+     xxx=file.read().split('\n')
+     print(xxx)
+     x={}
+     for y,xx in enumerate(xxx,start=1):
+          for y1 in xx.split():
+               x10=f'позиция:{xx.split().index(y1)}'
+               print(x10)
+               x[y]=xx
+               print(x)
+               
+'''Напиши программу, которая создает зеркальное отображение содержимого файла. Например, если в исходном файле `input.txt` содержится строка "Hello", 
+в новом файле `output.txt` должна быть строка "olleH". Повторяй этот процесс для каждой строки.'''
+
+with open('homework/input.txt','r',encoding='utf-8') as file:
+     y=file.read().split()
+     x=[]
+     for xx in y:
+        x.append(xx[::-1])
+     print(x)
+     x='\n'.join(x)
+
+''''''           
+                     
+
+               
+          
+     
+     
+          
+     
+     
+
+
+
+
+         
+
+
+
+
+        
+        
         
