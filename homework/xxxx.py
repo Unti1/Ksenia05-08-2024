@@ -159,10 +159,12 @@ func9('123555')
    Напишите функцию, которая принимает словарь с вложенными структурами. Попробуйте получить значение из вложенного словаря, обработав KeyError на любом уровне.'''
 def func10(x,y):
     try:
-        print(x[y])
-    except KeyError:
-        print('Ключа нет такого')
-
+        for y1 in y:
+            print(x[y1])
+    except KeyError as a:
+        print(f'Ключ {a} не найден')        
+      
+func10({"name": "John", "age": 30,"address": {"city": "New York"}},["addres"])  
 '''8 +. Конвертация валют.  
    Создайте программу, которая принимает курс валюты и сумму в другой валюте. Обработайте исключения, если пользователь вводит некорректные данные.'''
 class Zero(Exception):
@@ -212,9 +214,69 @@ func12('аапп')
 
 '''1. Каскадная обработка исключений.  
    Напишите программу, которая последовательно вызывает несколько функций (например, открытие файла, обработка данных, запись в новый файл). Каждая функция выбрасывает свое исключение. Реализуйте каскадную обработку этих исключений в вызывающем коде.'''
+def func13(x):
+    try:
+        with open(x,'r',encoding='utf-8') as f:
+            print(f.read())
+    except FileNotFoundError as a:
+        print(f'{a} не найден')   
+def func14(x):
+    try:
+        with open(x,'a',encoding='utf-8') as f:
+            f.write('Ксения')
+        func13(x)
+    except TypeError as a:
+        print(f' {a} - формат не тот')      
+def func15(x):
+    try:
+        with open(x,'w',encoding='utf-8') as f:
+            f.write('Привет ')
+        func14(x)
+    except TypeError as a:
+        print(f' {a} - 1формат не тот')             
 
+
+func15('1.txt')
 '''2. Создание класса исключения с атрибутами.  
-   Напишите собственное исключение InvalidDataError, которое принимает сообщение об ошибке и данные, вызвавшие ошибку. Реализуйте программу, которая выбрасывает это исключение и обрабатывает его.
+   Напишите собственное исключение InvalidDataError, которое принимает сообщение об ошибке и данные, вызвавшие ошибку. Реализуйте программу, которая выбрасывает это исключение и обрабатывает его.'''
+class InvalidDataError(Exception):
+    def __init__(self,message='Цифра меньше 8 - ошибочка'):
+        self.message=message
+        super().__init__(self.message)
+def chek(x):
+    if x < 8:
+        raise InvalidDataError()
+    
 
-5. Генерация ошибок через объект.  
+def func16(x):
+    try:
+        chek(x)
+        print(x)
+    except InvalidDataError as a:
+        print(a)
+func16(6)        
+'''5. Генерация ошибок через объект.  
    Создайте класс CustomProcessor, который имеет метод process. Метод выбрасывает исключение, если данные объекта не прошли валидацию. Напишите код для обработки этой ошибки.'''
+
+class Age(Exception):
+    def __init__(self,message='Возраст должен быть больше 18'):
+        self.message=message
+        super().__init__(self.message)
+
+
+
+class CustomProcessor():
+    def __init__(self,age):
+        self.age=age
+    def process(self):
+        if self.age < 18:
+            raise Age()
+            
+try:
+    a=CustomProcessor(8) 
+    a.process()
+    print('Готово')
+except Age as a:
+    print(a)    
+
+        
