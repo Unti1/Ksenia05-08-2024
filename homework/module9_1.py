@@ -475,8 +475,73 @@ def mod_3(x):
     return x % 3
 
 group_by_result([1, 2, 3, 4, 5, 6], mod_2, mod_3)
+'''Задача 1: "Динамическая трансформация"
+Описание: Напишите функцию dynamic_transform(data, conditions, transforms), которая принимает:
 
-        
+data — список чисел.
+conditions — список функций, каждая из которых возвращает True или False для элемента.
+transforms — список функций, каждая из которых преобразует элемент.
+Функция должна:
+
+Для каждого элемента применить все условия из conditions.
+Если хотя бы одно условие выполнено, применить соответствующую функцию из transforms (по индексу).
+Вернуть новый список, где каждый элемент преобразован, если условия выполнены.
+Пример:
+
+def is_even(x):
+    return x % 2 == 0
+
+def is_negative(x):
+    return x < 0
+
+def double(x):
+    return x * 2
+
+def negate(x):
+    return -x
+
+print(dynamic_transform([1, -2, 3, -4], [is_even, is_negative], [double, negate]))
+# [-2, -2, 3, -8]'''  
+
+def dynamic_transform(data, conditions, transforms):
+    xx=[]
+    for x in data:
+        if conditions[0](x) or conditions[1](x):
+            xx.append(transforms[1](transforms[0](x)))
+    print(xx)     
+    result = []
+    for item in data:
+        transformed = item
+        for index, condition in enumerate(conditions):
+            if condition(item):  # Если условие выполнено
+                transformed = transforms[index](transformed)
+                break  # Применяем только одно преобразование
+        result.append(transformed)
+    print(result) 
+
+
+
+         
+
+
+def is_even(x):
+    return x % 2 == 0
+
+def is_negative(x):
+    return x > 0
+
+def double(x):
+    return x * 2
+
+def negate(x):
+    return -x    
+
+dynamic_transform([1, -2, 3, -4], [is_even, is_negative], [double, negate])
+
+
+
+
+
 
 
 
