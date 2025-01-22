@@ -94,4 +94,39 @@ y1=[]
 [y1.append(x[1]) if x[0] == False else y.append(x[1]) for x in xx]
 res={'False':y1,'True':y}
 print(res)
+class Iter:
+    def __init__(self,n):
+        self.n=n
+        self.i=0
+    def __iter__(self):
+        return self
+    def __next__(self):
+        if self.n>self.i:
+            x=self.i
+            self.i+=1
+            return x
+        else:
+            raise StopIteration
+        
+first_n_elements = Iter(5) 
+
+print([x for x in first_n_elements])
+def first_n_elements(iterable, n):
+    iterator = iter(iterable)  # Создаем итератор из переданного объекта
+    result = []  # Список для хранения первых n элементов
+    
+    for _ in range(n):  # Выполняем n раз
+        try:
+            result.append(next(iterator))  # Добавляем следующий элемент в список
+        except StopIteration:
+            break  # Останавливаемся, если итерируемый объект закончился
+    
+    return result  # Возвращаем список
+print(first_n_elements(range(10), 5))
+
+
+
+
+
+
 
