@@ -1,35 +1,29 @@
-import threading
-counter = 0
-lock = threading.Lock()
+from multiprocessing import Process, Pipe
 
-def inc(name):
-    global counter
-    lock.acquire()
-    for i in range(1000):
-        counter+=1
-        print(name, counter)
-    lock.release()
+def worker(conn):
+    data = conn.recv()
+    print(f"Process received in worker1: {data}")
+    conn.send("Hello from worker1")  # Отправляем данные обратно
 
-def dec(name):
-    global counter
-    lock.acquire()
-    for i in range(1000):
-        counter-=1
-        print(name, counter)
-    lock.release()
+def worker2(conn, conn2):
+    conn.send("Hello from worker2")  # Отправляем данные в канал
+    data = conn.recv()
+    print(f"Process received in worker2: {data}")
+
+def worker3(conn):
+    conn.send("Hello from worker2")  # Отправляем данные в канал
+    data = conn.recv()
+    print(f"Process received in worker2: {data}")
+
+if __name__ == "__main__":
+    parent_conn, child_conn = Pipe()
+    parent_conn1, child_conn1 = Pipe()
+    p = Process(target=worker, args=(child_conn,))
+    p2 = Process(target=worker2, args=(parent_conn, parent_conn1))
+    p2 = Process(target=worker3, args=(child_conn1))
     
-thread1 = threading.Thread(target=inc, args=('Thread-1-inc',))
-thread2 = threading.Thread(target=inc, args=('Thread-2-inc',))
-thread3 = threading.Thread(target=dec, args=('Thread-3-dec',))
-thread4 = threading.Thread(target=dec, args=('Thread-4-dec',))
-
-thread1.start()
-thread2.start()
-thread3.start()
-thread4.start()
-thread1.join()
-thread2.join()
-thread3.join()
-thread4.join()
-print("Final Counter:", counter)
-
+    p.start()
+    p2.start()
+    
+    p.join()
+    p2.join()
