@@ -61,6 +61,3 @@ if __name__ == "__main__":
 
     c1.start()
     c2.start()
-
-    c1.join()
-    c2.join()
