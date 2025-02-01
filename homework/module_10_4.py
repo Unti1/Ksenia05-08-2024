@@ -93,20 +93,25 @@ class Table:
     def __init__(self,number):
         self.number=number
         self.guest=None
+
 class Guest(threading.Thread):
     def __init__(self,name):
         super().__init__()
         self.name=name
+
     def run(self):
         x=random.uniform(1,10)
         time.sleep(x)
         print(f"{self.name} покушал(-а) и ушёл(ушла)")
+
 class Cafe:
-    def __init__(self,queue,*tables:Table):
+    def __init__(self, queue, *tables:Table):
         self.tables=tables
         self.queue=Queue()
+
     def guest_arrival(self, *guests:Guest): 
-        for guest in guests:
+        # for guest in guests:
+        while not self.queue.empty():
             x=False
             for table in self.tables:
                 if table.guest is None:
@@ -114,12 +119,14 @@ class Cafe:
                     print(f'{guest.name} сел(-а) за стол номер {table.number}')
                     guest.start()  # Запуск потока гостя
                     x = True
-                    break
+                
             if not x:
-                    print(f'"{guest.name} в очереди"')
-                    self.queue.put(guest)
+                print(f'"{guest.name} в очереди"')
+                self.queue.put(guest)
+
     def discuss_guests(self) :
         for table in self.tables:
+            
             if table.guest and not table.guest.is_alive():
                 print(f'{table.guest.name} покушал(-а) и ушёл(ушла)"')
                 print(f'"Стол номер {table.number} свободен"')
@@ -153,9 +160,11 @@ if __name__ == "__main__":
     cafe = Cafe(*tables)
 # Приём гостей
     cafe.guest_arrival(*guests)
+
 while any(table.guest for table in tables):  # Пока хотя бы один стол занят
     cafe.discuss_guests()
-    time.sleep(1)    
+    time.sleep(1)
+    
 for guest in guests:
         guest.join()     
 
