@@ -335,3 +335,41 @@ if __name__=='__main__':
     x2=pipe3.recv()
     x3=pipe3.recv()
     print(x,x1,x2,x3)
+
+ '''Многопроцессорная обработка изображений
+- Запустите 4 процесса через multiprocessing.Process.
+- Каждый процесс применяет фильтр (например, инверсия цвета) к разным изображениям.
+- Используйте multiprocessing.Queue для передачи путей к изображениям.
+
+'''
+from multiprocessing import Process,Queue, Pool,Lock
+from PIL import Image
+import numpy as np
+lock=Lock()
+def invert_colors(q):
+    while not q.empty():
+            x=q.get()
+            image = Image.open(x)
+            image_array = np.array(image)
+            inverted_image_array = 255 - image_array
+            inverted_image = Image.fromarray(inverted_image_array)
+            inverted_image.save(x)
+            inverted_image.show()
+        
+
+x=['/Users/ksenia/Downloads/photo_2025-01-31 11.59.55.jpeg','/Users/ksenia/Downloads/photo_2025-01-31 11.59.59.jpeg','/Users/ksenia/Downloads/photo_2025-01-31 12.00.00.jpeg']
+
+if __name__=='__main__':
+    q=Queue()
+    
+    for xx in x:
+        q.put(xx)
+    x=0
+    thread=[]
+    for _ in range(2):
+        p=Process(target=invert_colors,args=(q,))
+        thread.append(p)
+        p.start()
+    for tth in thread:
+        tth.join()  
+   

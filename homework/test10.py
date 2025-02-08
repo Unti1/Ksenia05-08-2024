@@ -1,92 +1,48 @@
-'''Многопроцессорная обработка изображений
-- Запустите 4 процесса через multiprocessing.Process.
-- Каждый процесс применяет фильтр (например, инверсия цвета) к разным изображениям.
-- Используйте multiprocessing.Queue для передачи путей к изображениям.
+'''Многопроцессорный генератор отчетов
+- Процесс DataFetcher получает данные из API (можно замокать).
+- Процесс ReportGenerator формирует PDF-отчет (шаблон reportlab).
+- Свяжите процессы через multiprocessing.Queue.
 
 '''
-import threading
 
+import multiprocessing
 import time
-import random
-from multiprocessing import Process,Queue, Pool
-from PIL import Image
-import numpy as np
-q=Queue()
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib import pdfencrypt
 
-def invert_colors(q):
-    while not q.empty():
-        input_image_path=q.get()
-        image = Image.open(input_image_path)
-        image_array = np.array(image)
-        inverted_image_array = 255 - image_array
-        inverted_image = Image.fromarray(inverted_image_array)
-        inverted_image.save(input_image_path)
-        inverted_image.show()
+def func(q):
+    print('Получаем данные из API')
+    time.sleep(2)
+    x={"title": "Отчет", "content": "Это пример отчета, сгенерированного на основе данных API."}
+    q.put(x)
+    print('Данные отправлены')
 
-x=['/Users/ksenia/Downloads','/Users/ksenia/Downloads','/Users/ksenia/Downloads']
+def func1(q):
+    print("Ожидание данных для отчета...")
+    x = q.get() 
+    print("Данные получены для генерации отчета.")
+    
+
+    file = "/Users/ksenia/Downloads/Новая папка/report.pdf"
+    c = canvas.Canvas(file, pagesize=letter)
+    pdfencrypt.registerFont(TTFont('Arial', '/path/to/Arial.ttf'))  # Путь к шрифту
+
+# Устанавливаем шрифт
+    c.setFont("Arial", 12)
+
+    c.drawString(100, 750, f"Название: {x['title']}")
+    c.drawString(100, 730, f"Содержание: {x['content']}")
+    c.save()
+    
+    print(f"Отчет сгенерирован и сохранен в {file}")  
 
 if __name__=='__main__':
-    for xx in x:
-        q.put(xx)
-    x=0
-    thread=[]
-    for _ in range(4):
-        p=Process(target=inve)
-
-              
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-              
-        
-
-
-        
-      
-      
-               
-          
-             
-        
-     
-     
-  
-   
-    
-
-        
-    
-
-   
-
-   
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
+    q=multiprocessing.Queue()
+    t1=multiprocessing.Process(target=func,args=(q,))   
+    t2=multiprocessing.Process(target=func1,args=(q,))   
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()  
