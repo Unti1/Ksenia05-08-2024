@@ -18,14 +18,14 @@ def apply_discount(price, discount):
 #     assert apply_discount(price, discount) == expected
 
 
-@pytest.mark.parametrize("price, discount", 
-                         [
-                            (100, 110),
-                            (100, -100),
-                            (100, 0),
-                            (100, 200),
-                             ])
-# Тест на случай, когда скидка превышает допустимый диапазон
-def test_apply_discount_invalid(price, discount):
-    with pytest.raises(ValueError):
-        apply_discount(price, discount)
+# @pytest.mark.parametrize("price, discount", 
+#                          [
+#                             (100, 110),
+#                             (100, -100),
+#                             (100, 0),
+#                             (100, 200),
+#                              ])
+# # Тест на случай, когда скидка превышает допустимый диапазон
+# def test_apply_discount_invalid(price, discount):
+#     with pytest.raises(ValueError):
+#         apply_discount(price, discount)

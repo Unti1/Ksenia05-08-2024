@@ -1,0 +1,24 @@
+2025-02-16 20:17:12,524 - main
+[INFO] <module>:
+ 4 - Starting the application)
+2025-02-16 20:29:05,718 - main
+[INFO] <module>:
+ 4 - Starting the application
+2025-02-16T20:30:01.301855+03:00 - main
+[INFO] <module>:
+ 4 - Starting the application
+02/16/2502 20:31:08 - main
+[INFO] <module>:
+ 4 - Starting the application
+16.02 20:31:31 - main
+[INFO] <module>:
+ 4 - Starting the application
+16.02 20:32:29 - main
+[INFO] <module>:
+ 4 - Starting the application
+16.02 20:32:29 - main
+[ERROR] <module>:
+ 5 - Some error gone
+16.02 20:32:29 - main
+[WARNING] <module>:
+ 6 - This some warning
