@@ -31,7 +31,7 @@ def func():
 def func1():
     params = {'q':'чихуаху'}
     response = requests.get('https://yandex.ru/search',params=params)
-    print(response.text)
+    print(response.json)
 
 import numpy as np
 arr = np.array([1, 2, 3, 4, 5])
