@@ -25,3 +25,11 @@
 2025-03-07 12:07:30,508 - 1236628758
 [ERROR] <module>:
  4 - Ошибка
+2025-03-07 12:42:51,721 - 959086433
+[ERROR] <module>:
+ 7 - Traceback (most recent call last):
+  File "C:\Users\NatalkaNerealka\AppData\Local\Temp\ipykernel_13468\959086433.py", line 5, in <module>
+    10 / 0
+    ~~~^~~
+ZeroDivisionError: division by zero
+
