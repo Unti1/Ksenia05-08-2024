@@ -1,9 +1,10 @@
-from sqlalchemy import Integer, String
+from sqlalchemy import ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
-from settings.database import Base
+from settings.database import Base, uniq_str_an
 
 
 class User(Base):
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String, nullable=False)
-    emain: Mapped[str] = mapped_column(String, unique=True, nullable=False)
+    username: Mapped[uniq_str_an]
+    email: Mapped[uniq_str_an]
+    password: Mapped[str]
+    profile_id: Mapped[int | None] = mapped_column(ForeignKey('profiles.id'))
