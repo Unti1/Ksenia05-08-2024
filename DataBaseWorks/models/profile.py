@@ -2,7 +2,7 @@ from tokenize import String
 from typing import List
 from sqlalchemy import ARRAY, text
 from sqlalchemy.dialects.postgresql import JSON
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from models.enums import GenderEnum, ProfessionEnum
 from settings.database import Base, array_or_none_an
 
@@ -18,3 +18,9 @@ class Profile(Base):
     )
     interests: Mapped[array_or_none_an]
     contacts: Mapped[dict | None] = mapped_column(JSON)
+    
+    user: Mapped['User'] = relationship(
+        'User',
+        back_populates='profile',
+        uselist=False,
+    )
