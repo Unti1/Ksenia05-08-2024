@@ -16,8 +16,14 @@ class Post(Base):
     )
     user_id: Mapped[int] = mapped_column(ForeignKey('users.id')) # Подключение к внешнему ключу таблицы users по полю id
     
-    user: Mapped['User'] = relationship(
+    users: Mapped['User'] = relationship(
         'User',
         back_populates='posts',  # Устанавливаем связь с таблицей users через поле posts
+    )
+    # Вопрос: без разницы в каком классе устанавливать связующий ключ? ( устанавливать в классе, который больше зависит - (к большему))
+    comment: Mapped['Comment'] = relationship( # здесь : или =? и я же могу назвать как захочу?
+        'Comment',
+        back_populates='post',  # Здесь название атрибутка же другого класса как в строке 24? 
+        cascade='all, delete-orphan', # указывет от главного? (от одного)
     )
     

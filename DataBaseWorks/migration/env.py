@@ -55,7 +55,7 @@ def run_migrations_offline() -> None:
 
 
 def run_migrations_online() -> None:
-    """Run migrations in 'online' mode.
+    """Run migrations in 'onli ne' mode.
 
     In this scenario we need to create an Engine
     and associate a connection with the context.

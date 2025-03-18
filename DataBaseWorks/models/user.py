@@ -18,10 +18,15 @@ class User(Base):
         
     )
     
-    posts = Mapped['Post'] = relationship(
+    posts : Mapped['Post'] = relationship(
         'Post',
-        back_populates='user',
-        cascade='all, delete-orphan',  # Удаление всех связанных постов при удалении пользователя
+        back_populates='users',
+        cascade='all, delete-orphan',  
     )
     
+    comment : Mapped['Comment'] = relationship(
+        'Comment',
+        back_populates='user',
+        cascade='all, delete-orphan',  
+    )
     

@@ -1,9 +1,10 @@
+from settings.config import settings
 from datetime import datetime
 from tokenize import String
 from typing import Annotated, List
 from sqlalchemy import ARRAY, Integer, create_engine, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, declared_attr, mapped_column, sessionmaker
-from settings.config import settings
+
 
 DATABASE_URL = settings.DATABASE_SQLITE
 
