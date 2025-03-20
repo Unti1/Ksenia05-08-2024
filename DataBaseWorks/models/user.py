@@ -1,5 +1,8 @@
-from sqlalchemy import ForeignKey, Integer, String
+import bcrypt
+from sqlalchemy import ForeignKey, Integer, String, select
 from sqlalchemy.orm import Mapped, Session, mapped_column, relationship
+from models.enums import GenderEnum, ProfessionEnum
+from models.profile import Profile
 from settings.database import Base, connection, uniq_str_an
 
 
@@ -31,7 +34,18 @@ class User(Base):
     
     @classmethod
     @connection
-    def create_user(cls, username: str, email: str, password: str, session: Session = None):
+    def create_user(cls, 
+                    username: str, 
+                    email: str, 
+                    password: str,
+                    gender: GenderEnum,
+                    name: str = None,
+                    surname: str = None,
+                    age: int = None,
+                    profession: ProfessionEnum = ProfessionEnum.UNEMPLOYED,
+                    interests: list[str] = [],
+                    contacts: dict = {},
+                    session: Session = None) -> dict[str, int]:
         """Этот метод создает нового пользователя в базе данных.
 
         Args:
@@ -44,10 +58,65 @@ class User(Base):
             User: новый созданный пользователь
 
         """
-        new_user = User(username=username, email=email, password=password)
-        session.add(new_user)
-        session.commit()
-        return new_user
-
+        existed_row = session.execute(select(cls).where(cls.username == username))
+        user = existed_row.scalars().first() 
+        if user:
+            return user
 
         
+        hash_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        new_user = User(username=username, email=email, password=str(hash_pw)[2:-1])
+    
+        session.add(new_user)
+        session.flush() # Промежуточный шаг для получения user.id без коммита
+    
+        profile = Profile(
+            user_id = new_user.id,
+            name=name if name else username,
+            surname=surname,
+            age=age,
+            gender=gender,
+            profession=profession,
+            interests=interests,
+            contacts=contacts,
+        )
+    
+        session.add(profile)
+        session.commit()
+        print(f'Создан пользователь с ID {new_user.id}и ему присвоен профиль с ID {profile.id}')
+
+        return {'user_id': new_user.id, 'profile_id': profile.id}
+
+    @classmethod
+    @connection
+    def create_many(cls,
+                    users_data: list[dict], 
+                    session: Session) -> list[int]:
+        users_list = [
+            User(
+                username=user_data['username'],
+                email=user_data['email'],
+                password=user_data['password']
+            )   
+            for user_data in users_data
+        ]
+        
+        session.add_all(users_list)
+        session.flush()
+        
+        profile_list = [
+            Profile(
+                user_id=user_row.id,
+                name=user_row.username,
+                gender= GenderEnum.MALE,
+                interests= [],
+                contacts={},
+            )   
+            for user_row in users_list
+        ]
+        
+        session.add_all(profile_list)
+        session.commit() 
+        
+    def __str__(self):
+        return f'[{self.id}] {self.username} | {self.email}'

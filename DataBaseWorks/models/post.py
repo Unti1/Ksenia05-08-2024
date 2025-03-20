@@ -1,8 +1,8 @@
 
 from sqlalchemy import ARRAY, ForeignKey, String, Text, text
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, Session, mapped_column, relationship
 from models.enums import StatusEnum
-from settings.database import Base, array_or_none_an
+from settings.database import Base, array_or_none_an, connection
 
 
 class Post(Base):
@@ -30,3 +30,25 @@ class Post(Base):
         cascade='all, delete-orphan', # указывет от главного? (от одного)
     )
     
+    @classmethod
+    @connection
+    def create(cls,
+               user_id:int,
+               title: str,
+               content:str,
+               main_photo_url:str,
+               photo_urls: list = [],
+               session: Session = None) -> int:
+        
+        new_post = Post(
+            user_id=user_id,
+            title=title,
+            content=content,
+            main_photo_url=main_photo_url,
+            photo_urls=photo_urls
+        )
+        
+        session.add(new_post)
+        session.commit()
+        
+        return new_post.id
