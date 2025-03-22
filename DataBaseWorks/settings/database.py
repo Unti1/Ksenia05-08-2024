@@ -98,11 +98,20 @@ class Base(DeclarativeBase):
         return concrete_row
         
 
-
-
-
-
+    @classmethod
+    @connection
+    def update_per_id(cls,
+                    id: int,
+                    session: Session = None):
         
+        rows = session.execute(select(cls).where(cls.id == id))
+        concrete_row = rows.scalars().first()
+        if not concrete_row:
+            return False
+        
+        session.delete(concrete_row)
+        session.commit()
+        return True    
     
     def to_dict(self) -> dict:
         columns = class_mapper(self.__class__).columns
