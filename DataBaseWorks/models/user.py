@@ -1,3 +1,4 @@
+from typing import Any, Dict, List, Self
 import bcrypt
 from sqlalchemy import ForeignKey, Integer, String, select
 from sqlalchemy.orm import Mapped, Session, mapped_column, relationship
@@ -34,18 +35,18 @@ class User(Base):
     
     @classmethod
     @connection
-    def create_user(cls, 
-                    username: str, 
-                    email: str, 
-                    password: str,
-                    gender: GenderEnum,
-                    name: str = None,
-                    surname: str = None,
-                    age: int = None,
-                    profession: ProfessionEnum = ProfessionEnum.UNEMPLOYED,
-                    interests: list[str] = [],
-                    contacts: dict = {},
-                    session: Session = None) -> dict[str, int]:
+    def add(cls, 
+            username: str, 
+            email: str, 
+            password: str,
+            gender: GenderEnum,
+            name: str = None,
+            surname: str = None,
+            age: int = None,
+            profession: ProfessionEnum = ProfessionEnum.UNEMPLOYED,
+            interests: list[str] = [],
+            contacts: dict = {},
+            session: Session = None) -> dict[str, int]:
         """Этот метод создает нового пользователя в базе данных.
 
         Args:
@@ -89,9 +90,9 @@ class User(Base):
 
     @classmethod
     @connection
-    def create_many(cls,
-                    users_data: list[dict], 
-                    session: Session) -> list[int]:
+    def add_many(cls,
+                users_data: List[Dict[str, Any]], 
+                session: Session = None) -> list[int]:
         users_list = [
             User(
                 username=user_data['username'],
@@ -116,7 +117,16 @@ class User(Base):
         ]
         
         session.add_all(profile_list)
-        session.commit() 
-        
+        session.commit()
+
+    @classmethod
+    @connection
+    def get_per_username(cls,
+                         username:str,
+                         session: Session = None) -> Self|None:
+        rows = session.execute(select(cls).where(cls.username == username))
+        user = rows.scalars().first()
+        return user
+
     def __str__(self):
         return f'[{self.id}] {self.username} | {self.email}'

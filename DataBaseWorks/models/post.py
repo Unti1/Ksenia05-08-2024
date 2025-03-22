@@ -10,7 +10,6 @@ class Post(Base):
     content: Mapped[str] = mapped_column(Text)
     main_photo_url: Mapped[str]
     photo_urls: Mapped[array_or_none_an]
-    
     status: Mapped[StatusEnum] = mapped_column(
         default=StatusEnum.PUBLISHED,
         server_default=text("'DRAFT'")
