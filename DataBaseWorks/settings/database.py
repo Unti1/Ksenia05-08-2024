@@ -37,12 +37,6 @@ class Base(DeclarativeBase):
     def __tablename__(cls) -> str:
         return cls.__name__.lower() + 's'
     
-    @classmethod
-    @connection
-    def get_by_id(cls, id: int, session: Session = None):
-        rows = session.execute(select(cls).where(cls.id == id))
-        obj = rows.scalars().first()
-        return obj
     
     @classmethod
     @connection
@@ -58,7 +52,6 @@ class Base(DeclarativeBase):
             raise e
         return new_instance
 
-    
     @classmethod
     @connection
     def add_many(cls,
@@ -97,10 +90,9 @@ class Base(DeclarativeBase):
         
         return concrete_row
         
-
     @classmethod
     @connection
-    def update_per_id(cls,
+    def delete_per_id(cls,
                     id: int,
                     session: Session = None):
         
@@ -112,6 +104,23 @@ class Base(DeclarativeBase):
         session.delete(concrete_row)
         session.commit()
         return True    
+    
+    @classmethod
+    @connection
+    def get_by_id(cls, id: int, session: Session = None):
+        rows = session.execute(select(cls).where(cls.id == id))
+        obj = rows.scalars().first()
+        return obj
+    
+    
+    @classmethod
+    @connection
+    def get_all(cls, session: Session = None):
+        rows = session.execute(select(cls))
+        objs = rows.scalars().all()
+        return objs
+
+
     
     def to_dict(self) -> dict:
         columns = class_mapper(self.__class__).columns

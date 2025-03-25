@@ -31,7 +31,6 @@ class User(Base):
         back_populates='user',
         cascade='all, delete-orphan',  
     )
-
     
     @classmethod
     @connection
@@ -97,7 +96,8 @@ class User(Base):
             User(
                 username=user_data['username'],
                 email=user_data['email'],
-                password=user_data['password']
+                password=str(bcrypt.hashpw(user_data['password'].encode('utf-8'), bcrypt.gensalt()))[2:-1],
+
             )   
             for user_data in users_data
         ]
@@ -127,6 +127,24 @@ class User(Base):
         rows = session.execute(select(cls).where(cls.username == username))
         user = rows.scalars().first()
         return user
+
+    @classmethod
+    @connection
+    def get_all_username_id(cls, session: Session = None):
+        rows = session.execute(select(cls.id, cls.username))
+        users = rows.all()
+        return users
+
+    @classmethod
+    @connection
+    def get_user_i(cls, user_id: int, session: Session = None):
+        query = select(cls).filter_by(id=user_id)
+        # query = select(cls).filter_by(cls.id==user_id)
+        # query = select(cls).where(cls.id==user_id)
+        result = session.execute(query)
+        user_info = result.scalar_one_or_none()
+        return user_info
+
 
     def __str__(self):
         return f'[{self.id}] {self.username} | {self.email}'
