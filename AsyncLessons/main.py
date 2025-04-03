@@ -23,6 +23,7 @@ async def bot_startup():
         base_router
     )
     await bot.delete_webhook(drop_pending_updates=True)
+    print('Bot statup')
     await dp.start_polling(bot)
 
 
